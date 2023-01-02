@@ -1,0 +1,51 @@
+.post {
+    display: flex;
+    align-items: center;
+    margin: 1.5em 1em;
+}
+.post a {
+    text-decoration: none;
+}
+
+.post_left {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.post_left i {
+    font-size: large;
+    color: grey;
+
+}
+.post div {
+    margin-right: 20px;
+}
+.post_center img {
+    height: 6em;
+    border-radius: 0.5em;
+
+}
+
+.post_right {
+    width: 85%;
+
+
+}
+
+.post_right h3 a {
+    font-weight: 600;
+    font-size: medium;
+    color: grey;
+
+}
+.post_right .post_info {
+    font-size: small;
+    color: grey;
+}
+p.post_info {
+    margin-top: 0.5em;
+    word-spacing: 0.5em;
+}

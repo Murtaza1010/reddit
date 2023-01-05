@@ -1,14 +1,27 @@
 import React from 'react';
 import './sideNav.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { updateState } from '../posts/currentSelectedSubSlice';
+import api from '../../api/api';
+import { addPosts } from '../posts/subredditSlice';
 
 
 export default function SideNav() {
+    const dispatch = useDispatch()
+    
     const menus = [
-        { to: '/r/popular', text: 'popular'},
+        { to: '/r/popular', text: 'popular' },
         { to: '/r/all', text: 'all' },
         { to: '/r/random', text: 'random' }
 
     ];
+    async function loadApiResponseToRedux (subName) {
+    const valueResponse = await api.posts.subredditApiCall(subName);
+    dispatch(addPosts(valueResponse))
+
+}
+
     const subreddits = [
         'reddit-suggests',
         'lifestyle',
@@ -31,7 +44,10 @@ export default function SideNav() {
         'money',
 
 
+    
     ]
+
+    
     return (
         <div className='sidenav'>
             <div className='sideNav_logo'>
@@ -44,14 +60,17 @@ export default function SideNav() {
             <div className='sideNav_links'>
                 <ul className='sideNav_menu'>
                     {menus.map(menu => (
-                        <li><a href={menu.to}>{menu.text}</a></li>
+                        <li onClick={() => { dispatch(updateState(menu.text)); loadApiResponseToRedux(menu.text) }}>{menu.text}</li>
+                        
+                        // On Click use the function that makes the api call 
                     ))}
                 </ul>
                 <hr></hr>
                 <ul className='sideNav_subreddit'>
-                        {subreddits.map(subreddit => (
-                            <li><a href={`/r/${subreddit}`}>{subreddit}</a></li>
-                        ))}
+                    {subreddits.map(subreddit => (
+                        <li onClick={() => { dispatch(updateState(subreddit)); loadApiResponseToRedux(subreddit) }}>{subreddit}</li>
+                        // On Click use the function that makes the api call 
+                    ))}
                 </ul>
 
             </div>

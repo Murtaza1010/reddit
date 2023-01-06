@@ -2,7 +2,7 @@ import React from 'react';
 import './PostItem.css';
 
 export default function PostItem(props) {
-    const { upvote, image, title, author, subreddit, num_comments } = props.post;
+    const { upvote, media, title, author, subreddit, num_comments } = props.post;
     return (
         <div className='post'>
             <div className='post_left'>
@@ -12,7 +12,7 @@ export default function PostItem(props) {
 
             </div>
             <div className='post_center'>
-                <img src={image} />
+                <span>{media}</span>
             </div>
             <div className='post_right'>
                 <h3><a href={`/r/${subreddit}/${title}`}>{title}</a></h3>

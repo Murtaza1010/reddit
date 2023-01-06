@@ -1,33 +1,49 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
-import './Header.css';
+import React from "react";
+import { useSelector } from "react-redux";
+import "./Header.css";
+import api from "../../api/api";
+import { useDispatch } from "react-redux";
+import { addPosts } from "../posts/subredditSlice";
+import { updateState } from "../posts/currentSelectedSubSlice";
 
 export default function Header() {
-  const currentSelectedSubreddit = useSelector((state) => state.currentSelectedReducer.subreddit)
+  const dispatch = useDispatch();
+  const currentSelectedSubreddit = useSelector(
+    (state) => state.currentSelectedReducer.subreddit
+  );
+  const headerLeft = ["popular", "Hot", "Rising", "Controversial", "Gilded"];
+
+  async function headerApiCall(subbreddit) {
+    const response = await api.posts.subredditApiCall(subbreddit);
+    dispatch(addPosts(response));
+  }
+
   return (
-    <div className='header'>
-      <div className='header_left'>
-        <ul >
-          {/* // On Click use the function that makes the api call  */}
-          <li ><a href='/r/popular' className='active'>Popular</a></li>
-          <li><a href='/r/hot'>Hot</a></li>
-          <li><a href='/r/rising'>Rising</a></li>
-          <li><a href='/r/controversial'>Controversial</a></li>
-          <li><a href='/r/gilded'>Gilded</a></li>
+    <div className="header">
+      <div className="header_left">
+        <ul>
+          {headerLeft.map((subreddit) => (
+            <li
+              onClick={() => {
+                dispatch(updateState(subreddit));
+                headerApiCall(subreddit);
+              }}
+            >
+              {subreddit}
+            </li>
+          ))}
         </ul>
       </div>
 
-      <div className='header_right'>
+      <div className="header_right">
         <h1> {currentSelectedSubreddit}</h1>
-        <i className='fas fa-bell'></i>
-        <img src=''></img>
-        <div className='header_user'>
+        <i className="fas fa-bell"></i>
+        <img src=""></img>
+        <div className="header_user">
           <span>Murtaza Karim</span>
-          <i className='fas fa-caret-down'></i>
+          <i className="fas fa-caret-down"></i>
         </div>
       </div>
-
-
     </div>
-  )
+  );
 }

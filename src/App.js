@@ -13,7 +13,7 @@ function App() {
   const [postsData, setPostsData] = useState({})
   const [actualDataFromRedux, setActualDataFromRedux] = useState({})
  
-
+  
 
   async function loadPosts() {
     const subredditPosts = await api.posts.all(); // this make the api call and return the result
@@ -28,7 +28,7 @@ function App() {
     dispatch(addPosts(postsData))
   }, [postsData])
 
-
+  
 
   return (
     <div className="App">

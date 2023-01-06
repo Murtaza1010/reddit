@@ -1,5 +1,5 @@
 .sidenav {
-  width: 210px;
+  width: 230px;
   height: 100%;
   font-size: small;
   box-shadow: 2px 0px 1px 1px lightslategray;
@@ -21,17 +21,23 @@
   padding: 8px 10px;
   border: 1px solid lightslategray;
   box-shadow: 0px 1px lightslategray;
-  border-radius: 0px 50px;
-  outline-width: 0;
+  border-radius: 0px 10px 10px;
+
 }
-.sideNav_search i {
-  float: right;
-  margin-right: -2.6px;
-  font-size: 20px;
-  position: relative;
+.sideNav_search button {
+  font-size: 22px;
+  position: absolute;
   color: rgb(245, 101, 101);
+  border-radius:  0px 10px 10px;
+  border-color: #808080;
+  border-style: dashed;
+  padding: 4px 5px;
+  padding: 4px 5px;
+  
+  
+
 }
-.sidenav a {
+.sideNav a {
   text-decoration: none;
   color: #808080;
 }
@@ -39,4 +45,12 @@
   padding: 10px 15px;
   margin: 10px;
   line-height: 32px;
+}
+.sideNav_links :hover :active {
+    font-weight: 600;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  background-color: rgb(243, 231, 231);
+  
+  
 }

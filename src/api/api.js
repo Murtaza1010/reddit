@@ -2,6 +2,7 @@
 const redditURl = "https://www.reddit.com/r/popular.json";
 const redditSubURI = "https://www.reddit.com/r/";
 const authOToken = process.env.REACT_APP_AUTH_TOKEN
+const redditRootURI = 'http://www.reddit.com/search.json';
 
 
 
@@ -27,11 +28,14 @@ const posts = {
         const data = await checkAndReturn(response);
         return data;
     },
-
+    async searchTermApiCall(searchTerm) {
+        const response = await fetch(`${redditRootURI}?q=${searchTerm}`);
+        const data = checkAndReturn(response);
+        return data
+    }
 
 }
 
 const api = { posts }
 export default api
 
-// export the funcation 
